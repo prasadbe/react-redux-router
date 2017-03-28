@@ -1,0 +1,6 @@
+{
+    "files.autoSave": "off",
+    "files.insertFinalNewline": false,
+    "editor.formatOnSave": false,
+    "react.beautify.onSave": true
+}
