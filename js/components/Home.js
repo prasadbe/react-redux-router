@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {connect} from 'react-redux';
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = (state) => {
+    return {login: state.login};
 };
 const mapDispatchProps = (dispatch) => {
     return {};
@@ -14,7 +14,7 @@ class Home extends React.Component {
 
     render() {
         return <div className="panel panel-default">
-            <div className="panel-body">A Basic Panel</div>
+            <div className="panel-body">Welcome {this.props.login.username}</div>
         </div>;
     }
 }

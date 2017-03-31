@@ -18,24 +18,24 @@ class Header extends React.Component {
         return <nav className="navbar navbar-inverse">
             <div className="container">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="/home">Project name</a>
+                    <Link to="/" className="navbar-brand">Project name</Link>
                 </div>
                 <div id="navbar" className="navbar-collapse collapse">
                     <ul className="nav navbar-nav">
-                        <li className="active">
-                            <Link to="/">Home</Link>
+                        <li>
+                            <Link to="/" activeClassName="active">Home</Link>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
+                            <Link to="/about" activeClassName="active">About</Link>
                         </li>
 
                         {((this.props.login.username == null || this.props.login.username == '')
                             ? <li>
-                                    <Link to="/login">Login</Link>
+                                    <Link to="/login" activeClassName="active">Login</Link>
                                 </li>
                             : <li>
 
-                                <Link to="/login">
+                                <Link to="/login" activeClassName="active">
                                     HI {this.props.login.username}
                                     Logout</Link>
                             </li>)}

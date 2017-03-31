@@ -13,8 +13,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchProps = (dispatch) => {
     return {
-        doLogin: (a) => {
-            console.log(7);
+        doRegister: (a) => {
             dispatch({type: config.type.loged, name: a});
         },
         doError: (a) => {
@@ -28,7 +27,7 @@ const mapDispatchProps = (dispatch) => {
         }
     };
 };
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         //props.doLogout();
@@ -38,31 +37,26 @@ class Login extends React.Component {
             .props
             .doLogout();
     }
-    componentWillReceiveProps(props) {
-        if (props.language.name != this.props.language.name) {}
-    }
+
     doLogin() {
-        console.log(document.getElementById('password').value);
+        if (this.refs.a.value == '' || document.getElementById('password').value == '') {
+            this
+                .props
+                .doError('Email & Password should not be an empty!');
+            return false;
+        }
         this
             .props
             .doLoading();
-        action
-            .doLogin(this.refs.a.value, document.getElementById('password').value)
-            .then((data) => {
-                this
-                    .props
-                    .doLogin(this.refs.a.value);
-                console.log(this.props.router);
-                this
-                    .props
-                    .router
-                    .push('/');
-            })
-            .catch((err) => {
-                this
-                    .props
-                    .doError(err.error);
-            });
+        window.setTimeout(() => {
+            this
+                .props
+                .doRegister(this.refs.a.value);
+            this
+                .props
+                .router
+                .push('/');
+        }, 2000);
     }
 
     render() {
@@ -73,10 +67,10 @@ class Login extends React.Component {
                         <div className="panel-heading">
                             <div className="row">
                                 <div className="col-xs-6">
-                                    <a href="#" className="active" id="login-form-link">Login</a>
+                                    <Link to="/login" id="login-form-link">Login</Link>
                                 </div>
                                 <div className="col-xs-6">
-                                    <Link to="/register">Register</Link>
+                                    <Link to="/register" className="active">Register</Link>
                                 </div>
                             </div>
                             <hr/></div>
@@ -87,7 +81,7 @@ class Login extends React.Component {
                                         ? <div className="text text-danger">{this.props.login.error_message}</div>
                                         : '')}
                                     <form
-                                        id="login-form"
+                                        id="register-form"
                                         action="javascript:void(0)"
                                         method="post"
                                         role="form"
@@ -129,7 +123,7 @@ class Login extends React.Component {
                                                             id="login-submit"
                                                             tabIndex="4"
                                                             className="form-control btn btn-login"
-                                                            value="Log In"/>)}
+                                                            value="Register"/>)}
                                                 </div>
                                             </div>
                                         </div>
@@ -153,4 +147,4 @@ class Login extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchProps)(Login);
+export default connect(mapStateToProps, mapDispatchProps)(Register);

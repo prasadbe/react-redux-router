@@ -8,14 +8,17 @@ app.set('view engine', 'html');
 var fs = require('fs');
 app.use('/build', express.static(__dirname + '/build'));
 app.get('*', function (req, res) {
-    console.log(__dirname + '/build/webpack-manifest.json');
-    fs.readFile(__dirname + '/build/webpack-manifest.json', 'utf8', function (error, webpack) {
-        if (error) 
-            throw error;
-        res.render('index', {
-            webpack: JSON.parse(webpack)
+
+    fs
+        .readFile(__dirname + '/build/webpack-manifest.json', 'utf8', function (error, webpack) {
+            if (error) 
+                console.log(error);
+            res.render('index', {
+                webpack: (typeof webpack === 'undefined')
+                    ? ''
+                    : JSON.parse(webpack)
+            });
         });
-    });
 
 });
 http
